@@ -18,11 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cg.onlineshopping.entities.Address;
 import com.cg.onlineshopping.entities.Customer;
-import com.cg.onlineshopping.exception.AddressAlreadyExistsException;
-import com.cg.onlineshopping.exception.AddressNotFoundException;
 import com.cg.onlineshopping.exception.CustomerAlreadyExistsException;
 import com.cg.onlineshopping.exception.CustomerNotFoundException;
 
@@ -86,7 +82,7 @@ public class CustomerController{
 	}
 	@GetMapping("customer/get/id/{id}")
 	public ResponseEntity<CustomerDetails> viewCustomer(@PathVariable("id") Integer customerId)
-			throws AddressNotFoundException {
+			throws CustomerNotFoundException {
 		try {
 			Customer cust = service.viewCustomer(customerId);
 			CustomerDetails details = customerutil.toDetails(cust);
@@ -99,7 +95,7 @@ public class CustomerController{
 
 	@DeleteMapping("customer/remove/{customerId}")
 	public ResponseEntity<Void> removeCustomer(@PathVariable("customerId") Integer customerId)
-			throws AddressNotFoundException {
+			throws CustomerNotFoundException {
 		try {
 			service.removeCustomer( customerId);
 			return new ResponseEntity<Void>(HttpStatus.OK);
