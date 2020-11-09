@@ -7,6 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+/**
+ * The Customer program contains all the entities and constructor method that
+ * call all the variable in Customer
+ * 
+ * @author Anish Nair
+ * @version 1.0
+ * @since 2020-10-19
+ */
 
 @Table(name = "customers")
 @Entity
@@ -14,11 +22,8 @@ public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
-
 	private int customerId;
 	private String firstName;
-	
 	private String lastName;
 	private String mobileNumber;
 	private String email;

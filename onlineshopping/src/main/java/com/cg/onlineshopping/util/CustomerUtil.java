@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.cg.onlineshopping.dto.CustomerDetails;
 import com.cg.onlineshopping.entities.Customer;
+import com.cg.onlineshopping.model.CustomerDetails;
 
 @Component
 public class CustomerUtil {

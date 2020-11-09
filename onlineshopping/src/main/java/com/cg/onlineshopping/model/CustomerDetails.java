@@ -1,4 +1,4 @@
-package com.cg.onlineshopping.dto;
+package com.cg.onlineshopping.model;
 
 import com.cg.onlineshopping.entities.Address;
 
