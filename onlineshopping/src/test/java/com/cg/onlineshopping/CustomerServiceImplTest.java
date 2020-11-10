@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,7 +24,7 @@ import com.cg.onlineshopping.exception.CustomerNotFoundException;
 import com.cg.onlineshopping.repository.ICustomerRepository;
 import com.cg.onlineshopping.service.impl.CustomerServiceImpl;
 
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 @SpringBootTest
  class CustomerServiceImplTest {
 	@Autowired
