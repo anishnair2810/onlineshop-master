@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.cg.onlineshopping.exception.CustomerAlreadyExistsException;
 import com.cg.onlineshopping.exception.CustomerNotFoundException;
+import com.cg.onlineshopping.model.CustomerDetails;
 import com.cg.onlineshopping.model.UpdateCustomerRequest;
 import com.cg.onlineshopping.util.CustomerUtil;
 import org.hibernate.sql.Update;
@@ -191,16 +192,57 @@ public class CustomerControllerTest {
 		when(service.updateCustomer(Mockito.any(Customer.class))).thenThrow(new CustomerNotFoundException("Sample error"));
 
 		//Create Sample CreateCustomerRequest that needs to be passed in controller
+
+		Address add = new Address();
+		add.setStreetNo("15th");
+		add.setBuildingName("Asian");
+		add.setCity("hissar");
+		add.setState("Haryana");
+		add.setCountry("India");
+		add.setPincode("122022");
+
 		UpdateCustomerRequest req = new UpdateCustomerRequest();
 		req.setEmail("Sample@Gmail.com");
 		req.setFirstName("Anish");
 		req.setLastName("Nair");
 		req.setMobileNumber("12345");
+		req.setAddress(add);
+
 
 		//Call controller and assert
 		Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, controller.update(req).getStatusCode());
 	}
+	@Test
+	public void testViewCustomerSuccessRequest() throws Exception {
 
+		//Mock service layer call
+		Customer cust1 = new Customer("Anish", "Nair", "12345", "Sample@Gmail.com", null);
+		Customer cust2 = new Customer("Anish2", "Nair2", "12345", "Sample2@Gmail.com", null);
+		List<Customer> allCustList = new ArrayList();
+		allCustList.add(cust1);
+		allCustList.add(cust2);
+		when(service.viewCustomer(cust1.getCustomerId())).thenReturn(cust1);
+
+		//Call controller and assert
+		Assert.assertEquals(HttpStatus.OK, controller.viewCustomer(cust1.getCustomerId()).getStatusCode());
+
+	}
+	@Test
+	public void testViewCustomerFailureScenario() throws Exception {
+		Customer cust1 = new Customer("Anish", "Nair", "12345", "Sample@Gmail.com", null);
+		Customer cust2 = new Customer("Anish2", "Nair2", "12345", "Sample2@Gmail.com", null);
+		List<Customer> allCustList = new ArrayList();
+		allCustList.add(cust1);
+		allCustList.add(cust2);
+		//Mock Service Layer exception
+		when(service.viewCustomer(cust1.getCustomerId())).thenThrow(new CustomerNotFoundException("Sample error"));
+
+		//Call Controller
+		ResponseEntity<CustomerDetails> response = controller.viewCustomer(cust1.getCustomerId());
+
+		//Assert
+		Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
 	/*
 		 * @Test public void addCustomer() throws Exception { String uri = "/customers";
 		 * Customer cust = new Customer(null, null, null, null, null);

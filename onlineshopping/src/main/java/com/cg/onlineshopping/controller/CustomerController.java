@@ -65,7 +65,7 @@ public class CustomerController{
 			CustomerDetails details = customerutil.toDetails(cust);
 			return new ResponseEntity<>(details, HttpStatus.OK);
 		} catch (Exception e) {
-			LOGGER.error("unable to update address for customerId:{} errlog: ", requestData.getCustomerId(), e);
+			LOGGER.error("unable to update customer for customerId:{} errlog: ", requestData.getCustomerId(), e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
