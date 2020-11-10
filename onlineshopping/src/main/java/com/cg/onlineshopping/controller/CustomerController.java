@@ -44,7 +44,7 @@ public class CustomerController{
 	public ResponseEntity<CustomerDetails> addCustomer(@RequestBody @Valid CreateCustomerRequest requestData)
 			throws CustomerAlreadyExistsException {
 		try {
-			Customer cust=service.addCustomer(new Customer(requestData.getFirstName(),requestData.getLastName(),requestData.getMobileNumber(),requestData.getEmail(),requestData.getAddress()));
+			Customer cust=new Customer(requestData.getFirstName(),requestData.getLastName(),requestData.getMobileNumber(),requestData.getEmail(),requestData.getAddress());
 			cust = service.addCustomer(cust);
 			CustomerDetails details = customerutil.toDetails(cust);
 			return new ResponseEntity<>(details, HttpStatus.OK);
@@ -71,7 +71,7 @@ public class CustomerController{
 		}
 
 	}
-	@RequestMapping("customer/viewall")
+	@GetMapping("customer/viewall")
 	public ResponseEntity<List<Customer>> viewAllCustomers() {
 		try {
 			return new ResponseEntity<>(service.viewAllCustomers(), HttpStatus.OK);

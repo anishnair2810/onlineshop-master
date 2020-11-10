@@ -25,7 +25,7 @@ import com.cg.onlineshopping.service.impl.CustomerServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CustomerServiceImplTest {
+ class CustomerServiceImplTest {
 	@Autowired
 	private CustomerServiceImpl service;
 
@@ -65,7 +65,7 @@ public class CustomerServiceImplTest {
 
 	}
 	@Test
-	void testGetAllCustomers() {
+	void testGetAllCustomers() throws Exception {
 
 		Customer cust1 = new Customer(null, null, null, null, null);
 		cust1.setFirstName("Anish");

@@ -12,7 +12,7 @@ public interface ICustomerService {
 	public Customer addCustomer(Customer cust) throws CustomerAlreadyExistsException;
 	public Customer updateCustomer(Customer cust) throws CustomerNotFoundException;
 	public Customer removeCustomer(Integer customerId) throws CustomerNotFoundException;
-	public List<Customer> viewAllCustomers() ;
+	public List<Customer> viewAllCustomers() throws Exception ;
 	public Customer  viewCustomer(Integer customerId)throws CustomerNotFoundException;
 	public Customer findById(Integer customerId) throws CustomerNotFoundException;
 	

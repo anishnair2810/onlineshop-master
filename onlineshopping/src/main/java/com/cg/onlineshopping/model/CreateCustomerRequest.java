@@ -24,7 +24,7 @@ public class CreateCustomerRequest {
 	private String mobileNumber;
     @NotBlank @Size(min =2, max = 20)
 	private String email;
-    @NotBlank @Size(min =2, max = 20)
+
 	private Address address;
 	public String getFirstName() {
 		return firstName;

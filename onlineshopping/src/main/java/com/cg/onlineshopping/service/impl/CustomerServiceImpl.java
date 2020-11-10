@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements ICustomerService {
 	}
 
 	@Override
-	public List<Customer> viewAllCustomers() {
+	public List<Customer> viewAllCustomers() throws Exception {
 		List<Customer> addresses=new ArrayList<Customer>();
 		repo.findAll().forEach(addresses::add);
 		
