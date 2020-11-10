@@ -39,7 +39,7 @@ import com.cg.onlineshopping.model.CreateCustomerRequest;
 import com.cg.onlineshopping.service.ICustomerService;
 import com.cg.onlineshopping.service.impl.CustomerServiceImpl;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class CustomerControllerTest {
 
 	@Mock
