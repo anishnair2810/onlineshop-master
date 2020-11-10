@@ -10,7 +10,9 @@ import java.util.List;
 
 import com.cg.onlineshopping.exception.CustomerAlreadyExistsException;
 import com.cg.onlineshopping.exception.CustomerNotFoundException;
+import com.cg.onlineshopping.model.UpdateCustomerRequest;
 import com.cg.onlineshopping.util.CustomerUtil;
+import org.hibernate.sql.Update;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -156,6 +158,47 @@ public class CustomerControllerTest {
 
 		//Assert
 		Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+	}
+	@Test
+	public void testUpdateCustomerSuccessScenario() throws Exception{
+		//Mock Service Layer
+
+		Address add = new Address();
+		add.setStreetNo("15th");
+		add.setBuildingName("Asian");
+		add.setCity("hissar");
+		add.setState("Haryana");
+		add.setCountry("India");
+		add.setPincode("122022");
+		Customer cust1 = new Customer("Anish", "Nair", "12345", "Sample@Gmail.com", add);
+		cust1.setCustomerId(123);
+		when(service.addCustomer(Mockito.any(Customer.class))).thenReturn(cust1);
+
+		//Create Sample CreateCustomerRequest that needs to be passed in controller
+		UpdateCustomerRequest req = new UpdateCustomerRequest();
+		req.setAddress(add);
+		req.setEmail("Sample@Gmail.com");
+		req.setFirstName("Anish");
+		req.setLastName("Nair");
+		req.setMobileNumber("12345");
+
+		//Call Controller and assert
+		Assert.assertEquals(HttpStatus.OK, controller.update(req).getStatusCode());
+	}
+	@Test
+	public void testUpdateCustomerFailure() {
+		//Mock Service Layer
+		when(service.updateCustomer(Mockito.any(Customer.class))).thenThrow(new CustomerNotFoundException("Sample error"));
+
+		//Create Sample CreateCustomerRequest that needs to be passed in controller
+		UpdateCustomerRequest req = new UpdateCustomerRequest();
+		req.setEmail("Sample@Gmail.com");
+		req.setFirstName("Anish");
+		req.setLastName("Nair");
+		req.setMobileNumber("12345");
+
+		//Call controller and assert
+		Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, controller.update(req).getStatusCode());
 	}
 
 	/*
